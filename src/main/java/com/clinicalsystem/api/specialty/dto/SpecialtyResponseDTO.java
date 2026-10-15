@@ -1,6 +1,7 @@
 package com.clinicalsystem.api.specialty.dto;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public class SpecialtyResponseDTO {

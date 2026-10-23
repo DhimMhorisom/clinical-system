@@ -12,9 +12,6 @@ import org.springframework.stereotype.Service;
 public class SpecialtyService {
 
     private final SpecialtyRepository specialtyRepository;
-
-
-
     public SpecialtyService(SpecialtyRepository specialtyRepository) {
         this.specialtyRepository = specialtyRepository;
     }

@@ -57,10 +57,10 @@ public class SpecialtyService {
     }
 
     public void delete(Long id){
-        specialtyRepository.findById(id)
+        Specialty specialty = specialtyRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Specialty not found"));
 
-        specialtyRepository.deleteById(id);
+        specialtyRepository.delete(specialty);
     }
 
     private SpecialtyResponseDTO convertForResponseDTO(Specialty specialty){

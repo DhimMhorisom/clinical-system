@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Locale;
+
 
 @Service
 public class DoctorService {
@@ -50,9 +52,12 @@ public class DoctorService {
     @Transactional
     public DoctorResponseDTO create(DoctorRequestDTO dto){
 
+        // Normalize CRM UF to uppercase.
+        String crmUf = dto.getCrmUf().toUpperCase(Locale.ROOT);
+
         if(doctorRepository.existsByCrmAndCrmUf(
                 dto.getCrm(),
-                dto.getCrmUf()
+                crmUf
         )) {
             throw new AlreadyExistingException("Doctor with this CRM and UF already exists.");
         }
@@ -63,7 +68,7 @@ public class DoctorService {
         Doctor doctor = new Doctor(
                 dto.getName(),
                 dto.getCrm(),
-                dto.getCrmUf(),
+                crmUf,
                 specialty);
 
         Doctor doctorSaved = doctorRepository.save(doctor);
@@ -72,14 +77,17 @@ public class DoctorService {
     }
 
     @Transactional
-    public DoctorResponseDTO update(DoctorRequestDTO dto , Long id){
+    public DoctorResponseDTO update(DoctorRequestDTO dto, Long id){
+
+        // Normalize CRM UF to uppercase.
+        String crmUf = dto.getCrmUf().toUpperCase(Locale.ROOT);
 
         Doctor existingDoctor = doctorRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Doctor not found."));
 
         if(doctorRepository.existsByCrmAndCrmUfAndIdNot(
                 dto.getCrm(),
-                dto.getCrmUf(),
+                crmUf,
                 id
         )) {
             throw new AlreadyExistingException("Doctor with this CRM and UF already exists.");
@@ -90,7 +98,7 @@ public class DoctorService {
 
         existingDoctor.setName(dto.getName());
         existingDoctor.setCrm(dto.getCrm());
-        existingDoctor.setCrmUf(dto.getCrmUf());
+        existingDoctor.setCrmUf(crmUf);
         existingDoctor.setSpecialty(specialty);
 
         Doctor doctorSaved = doctorRepository.save(existingDoctor);

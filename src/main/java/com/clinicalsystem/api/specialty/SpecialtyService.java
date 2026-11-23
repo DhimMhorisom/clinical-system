@@ -58,7 +58,7 @@ public class SpecialtyService {
 
     public void delete(Long id){
         Specialty specialty = specialtyRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Specialty not found"));
+                .orElseThrow(() -> new NotFoundException("Specialty not found."));
 
         specialtyRepository.delete(specialty);
     }

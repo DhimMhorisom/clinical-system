@@ -10,15 +10,15 @@ public class ConsultationResponseDTO {
 
     private Long id;
     private LocalDateTime consultationDate;
-    private Long doctorId;
-    private Long patientId;
+    private String doctorName;
+    private String patientName;
     private ConsultationStatus status;
 
-    public ConsultationResponseDTO(Long id, LocalDateTime consultationDate, Long doctorId, Long patientId, ConsultationStatus status) {
+    public ConsultationResponseDTO(Long id, LocalDateTime consultationDate, String doctorName, String patientName, ConsultationStatus status) {
         this.id = id;
         this.consultationDate = consultationDate;
-        this.doctorId = doctorId;
-        this.patientId = patientId;
+        this.doctorName = doctorName;
+        this.patientName = patientName;
         this.status = status;
     }
 }

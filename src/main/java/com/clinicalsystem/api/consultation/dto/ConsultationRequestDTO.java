@@ -14,9 +14,6 @@ public class ConsultationRequestDTO {
     @NotNull(message = "The date and time of the appointment are mandatory.")
     private LocalDateTime consultationDate;
 
-    @NotNull(message = "The status is mandatory.")
-    private ConsultationStatus status;
-
     @NotNull(message = "The doctor's ID is mandatory.")
     private Long doctorId;
 
